@@ -5,12 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
     <style>
-        /* Styles remain the same */
+        /* Add your CSS styles here */
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Content remains the same -->
+        <!-- Your HTML content here -->
+        <h1>To-Do List</h1>
+        <form action="/add" method="POST">
+            <input type="text" name="task" placeholder="Enter a task">
+            <button type="submit">Add Task</button>
+        </form>
+        <ul id="task-list">
+            {% for task in tasks %}
+                <li draggable="true" ondragstart="drag(event)" data-index="{{ loop.index0 }}">
+                    {{ task['task'] }}
+                    <div class="btn-group">
+                        <form action="/delete/{{ task['priority'] }}" method="POST">
+                            <button>Delete</button>
+                        </form>
+                        {% if task['priority'] > 0 %}
+                            <form action="/swap/{{ task['priority'] }}" method="POST">
+                                <button>Move Up</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 
     <!-- Link to external JavaScript file -->

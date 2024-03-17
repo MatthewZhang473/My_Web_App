@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__, static_url_path='/static')
 
-
 # Initialize tasks list with a dictionary structure to hold both task text and priority
 tasks = []
 
